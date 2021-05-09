@@ -2,6 +2,11 @@ package org.mxcrossings.emailgroup.model;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 
 @Entity
 @Table(name = "user")
@@ -9,22 +14,37 @@ public class UserEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(nullable = false,updatable = false)
+    @Column(nullable = false, updatable = false)
     private Long id;
-    private String firstName;
-    private String lastName;
+
+    @Size(min = 3, max = 50, message = "Name must be between 3 and 50 characters.")
+    @NotBlank(message = "Name is required.")
+    private String name;
+
+    @NotBlank(message = "Email is required.")
+    @Email(message = "Invalid email. Try again.")
     @Column(unique = true)
     private String email;
-    private String password;
+
+    @NotNull
+    private String username;
+
+//    research maven dependency password encoder!!!
+//    https://maven.apache.org/guides/mini/guide-encryption.html
+//    @NotNull
+//    private String pwhash;
+
+//    private static final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+
+    //add getters and setters
 
     public UserEntity() {
     }
 
-    public UserEntity(String firstName, String lastName, String email, String password) {
-        this.firstName = firstName;
-        this.lastName = lastName;
+    public UserEntity(String name, String email, String username) {
+        this.name = name;
         this.email = email;
-        this.password = password;
+        this.username = username;
     }
 
     public Long getId() {
@@ -35,20 +55,12 @@ public class UserEntity implements Serializable {
         this.id = id;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getName() {
+        return name;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getEmail() {
@@ -59,22 +71,17 @@ public class UserEntity implements Serializable {
         this.email = email;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
+    public String getUsername() {
+        return username;
     }
 
     @Override
     public String toString() {
         return "UserEntity{" +
                 "id=" + id +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
+                ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
+                ", username='" + username + '\'' +
                 '}';
     }
 }

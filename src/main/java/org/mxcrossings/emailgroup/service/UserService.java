@@ -20,10 +20,6 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public UserEntity addUser(UserEntity userEntity) {
-        userEntity.setFirstName(UUID.randomUUID().toString());
-        return userRepository.save(userEntity);
-    }
 
     //method to return list of all users
     public List<UserEntity> findAllUsers() {

@@ -44,11 +44,11 @@ public class UserController {
         return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
-    @PostMapping("/add")
-    public ResponseEntity<UserEntity> addUser(@RequestBody UserEntity user){
-        UserEntity newUser = userService.addUser(user);
-        return new ResponseEntity<>(newUser, HttpStatus.CREATED);
-    }
+//    @PostMapping("/add")
+//    public ResponseEntity<UserEntity> addUser(@RequestBody UserEntity user){
+//        UserEntity newUser = userService.addUser(user);
+//        return new ResponseEntity<>(newUser, HttpStatus.CREATED);
+//    }
 
     @PutMapping("/update")
     public ResponseEntity<UserEntity> updateUser(@RequestBody UserEntity user){
