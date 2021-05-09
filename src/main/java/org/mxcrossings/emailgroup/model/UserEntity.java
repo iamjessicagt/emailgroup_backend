@@ -21,8 +21,8 @@ public class UserEntity implements Serializable {
     @NotBlank(message = "Name is required.")
     private String name;
 
-    @NotBlank(message = "Email is required.")
-    @Email(message = "Invalid email. Try again.")
+    @NotBlank(message = "Please provide a valid contact email.")
+    @Email
     @Column(unique = true)
     private String email;
 

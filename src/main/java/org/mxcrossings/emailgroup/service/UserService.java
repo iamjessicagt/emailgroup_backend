@@ -26,6 +26,9 @@ public class UserService {
         return userRepository.findAll();
     }
 
+    //method to add/create an user
+    public UserEntity addUser(UserEntity user) { return new UserEntity(); }
+
     //method to update/save an user
     public UserEntity updateUser(UserEntity userEntity) {
         return userRepository.save(userEntity);
@@ -50,5 +53,4 @@ public class UserService {
     public void deleteUser(Long id) {
         userRepository.deleteById(id);
     }
-
 }
