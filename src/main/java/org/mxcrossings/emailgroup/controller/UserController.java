@@ -1,36 +1,64 @@
 package org.mxcrossings.emailgroup.controller;
 
 import org.mxcrossings.emailgroup.model.UserEntity;
-import org.mxcrossings.emailgroup.repository.UserRepository;
+import org.mxcrossings.emailgroup.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
-@Controller
+import java.util.List;
+
+@RestController
 @RequestMapping(path = "/user")
 public class UserController {
 
     @Autowired
-    private UserRepository userRepository;
+    private final UserService userService;
 
-    @PostMapping(path = "/add")
-    public @ResponseBody String addNewUser(@RequestParam String firstName, @RequestParam String lastName, @RequestParam String email) {
-
-        UserEntity user = new UserEntity();
-        user.setFirstName(firstName);
-        user.setLastName(lastName);
-        user.setEmail(email);
-        userRepository.save(user);
-        return "User Created";
+    public UserController(UserService userService) {
+        this.userService = userService;
     }
 
-//    @GetMapping(path = "/all")
-//    public @ResponseBody Iterable < User > getAllUsers() {
-//        return userRepository.findAll();
-//    }
+    @GetMapping("/all")
+    public ResponseEntity<List<UserEntity>> getAllUsers(){
+        List<UserEntity> users = userService.findAllUsers();
+        return new ResponseEntity<>(users, HttpStatus.OK);
+    }
 
+    @GetMapping("/find/{name}")
+    public ResponseEntity<UserEntity> getUserByName(@PathVariable("name") String name){
+        UserEntity user = userService.findUserByName(name);
+        return new ResponseEntity<>(user, HttpStatus.OK);
+    }
+
+    @GetMapping("/find/{id}")
+    public ResponseEntity<UserEntity> getUserById(@PathVariable("id") Long id){
+        UserEntity user = userService.findUserById(id);
+        return new ResponseEntity<>(user, HttpStatus.OK);
+    }
+
+    @GetMapping("/find/{email}")
+    public ResponseEntity<UserEntity> getUserByEmail(@PathVariable("email") String email){
+        UserEntity user = userService.findUserByEmail(email);
+        return new ResponseEntity<>(user, HttpStatus.OK);
+    }
+
+    @PostMapping("/add")
+    public ResponseEntity<UserEntity> addUser(@RequestBody UserEntity user){
+        UserEntity newUser = userService.addUser(user);
+        return new ResponseEntity<>(newUser, HttpStatus.CREATED);
+    }
+
+    @PutMapping("/update")
+    public ResponseEntity<UserEntity> updateUser(@RequestBody UserEntity user){
+        UserEntity updateUser = userService.updateUser(user);
+        return new ResponseEntity<>(updateUser, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<UserEntity> deleteUser(@PathVariable("id") Long id){
+        userService.deleteUser(id);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 }
