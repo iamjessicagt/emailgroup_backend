@@ -1,5 +1,7 @@
 package org.mxcrossings.emailgroup.model;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import javax.validation.constraints.Email;
@@ -26,6 +28,15 @@ public class UserEntity implements Serializable {
     @Column(unique = true)
     private String email;
 
+    @NotBlank
+    @Column(unique = true)
+    private String phoneNumber;
+
+    @NotBlank
+    @DateTimeFormat
+    @Column(unique = true)
+    private String birthday;
+
     @NotNull
     private String username;
 
@@ -41,9 +52,11 @@ public class UserEntity implements Serializable {
     public UserEntity() {
     }
 
-    public UserEntity(String name, String email, String username) {
+    public UserEntity(String name, String email, String phoneNumber, String birthday, String username) {
         this.name = name;
         this.email = email;
+        this.phoneNumber = phoneNumber;
+        this.birthday = birthday;
         this.username = username;
     }
 
@@ -71,8 +84,28 @@ public class UserEntity implements Serializable {
         this.email = email;
     }
 
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(String birthday) {
+        this.birthday = birthday;
+    }
+
     public String getUsername() {
         return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     @Override
@@ -81,6 +114,8 @@ public class UserEntity implements Serializable {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", birthday='" + birthday + '\'' +
                 ", username='" + username + '\'' +
                 '}';
     }
