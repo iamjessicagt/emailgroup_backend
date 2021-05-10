@@ -19,9 +19,6 @@ public class UserEntity implements Serializable {
     @Column(nullable = false, updatable = false)
     private Long id;
 
-    @NotNull
-    private String username;
-
     @NotBlank(message = "Please provide a valid contact email.")
     @Email
     @Column(unique = true)
@@ -61,8 +58,7 @@ public class UserEntity implements Serializable {
     public UserEntity() {
     }
 
-    public UserEntity(String username, String email, String password, String firstName, String lastName, String phoneNumber, String birthday, String token) {
-        this.username = username;
+    public UserEntity(String email, String password, String firstName, String lastName, String phoneNumber, String birthday, String token) {
         this.email = email;
         this.password = password;
         this.firstName = firstName;
@@ -78,14 +74,6 @@ public class UserEntity implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
     }
 
     public String getEmail() {
@@ -148,7 +136,6 @@ public class UserEntity implements Serializable {
     public String toString() {
         return "UserEntity{" +
                 "id=" + id +
-                ", username='" + username + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", firstName='" + firstName + '\'' +

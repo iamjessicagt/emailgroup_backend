@@ -26,9 +26,15 @@ public class UserController {
         return new ResponseEntity<>(users, HttpStatus.OK);
     }
 
-    @GetMapping("/find/{name}")
-    public ResponseEntity<UserEntity> getUserByName(@PathVariable("name") String name){
-        UserEntity user = userService.findUserByName(name);
+    @GetMapping("/find/{firstName}")
+    public ResponseEntity<UserEntity> getUserByFistName(@PathVariable("firstName") String name){
+        UserEntity user = userService.findUserByFirstName(name);
+        return new ResponseEntity<>(user, HttpStatus.OK);
+    }
+
+    @GetMapping("/find/{lastName}")
+    public ResponseEntity<UserEntity> getUserByLastName(@PathVariable("lastName") String name){
+        UserEntity user = userService.findUserByLastName(name);
         return new ResponseEntity<>(user, HttpStatus.OK);
     }
 

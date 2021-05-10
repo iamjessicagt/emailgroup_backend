@@ -40,8 +40,12 @@ public class UserService {
     }
 
     //method to find User by Name
-    public UserEntity findUserByName(String name){
-        return userRepository.findUserByName(name).orElseThrow(() -> new UserNotFoundException("User by Name: " + name + "was not found"));
+    public UserEntity findUserByFirstName(String name){
+        return userRepository.findUserByFirstName(name).orElseThrow(() -> new UserNotFoundException("User by Name: " + name + "was not found"));
+    }
+
+    public UserEntity findUserByLastName(String name){
+        return userRepository.findUserByLastName(name).orElseThrow(() -> new UserNotFoundException("User by Name: " + name + "was not found"));
     }
 
     //method to find User by Email
