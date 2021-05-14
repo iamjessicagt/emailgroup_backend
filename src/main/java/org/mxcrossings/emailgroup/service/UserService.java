@@ -27,7 +27,7 @@ public class UserService {
     }
 
     //method to add/create an user
-    public UserEntity addUser(UserEntity user) { return new UserEntity(); }
+    public UserEntity addUser(UserEntity user) { return userRepository.save(user);}
 
     //method to update/save an user
     public UserEntity updateUser(UserEntity userEntity) {

@@ -36,44 +36,26 @@ public class UserEntity implements Serializable {
     private String lastName;
 
     @NotBlank
-    @Column(unique = true)
     private String phoneNumber;
 
     @NotBlank
     @DateTimeFormat
-    @Column(unique = true)
     private String birthday;
-
-    private String token;
-
-//    research maven dependency password encoder!!!
-//    https://maven.apache.org/guides/mini/guide-encryption.html
-
-
-//    private static final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-
-    //add getters and setters
-
 
     public UserEntity() {
     }
 
-    public UserEntity(String email, String password, String firstName, String lastName, String phoneNumber, String birthday, String token) {
+    public UserEntity(String email, String password, String firstName, String lastName, String phoneNumber, String birthday) {
         this.email = email;
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
         this.phoneNumber = phoneNumber;
         this.birthday = birthday;
-        this.token = token;
     }
 
     public Long getId() {
         return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getEmail() {
@@ -124,14 +106,6 @@ public class UserEntity implements Serializable {
         this.birthday = birthday;
     }
 
-    public String getToken() {
-        return token;
-    }
-
-    public void setToken(String token) {
-        this.token = token;
-    }
-
     @Override
     public String toString() {
         return "UserEntity{" +
@@ -142,7 +116,6 @@ public class UserEntity implements Serializable {
                 ", lastName='" + lastName + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
                 ", birthday='" + birthday + '\'' +
-                ", token='" + token + '\'' +
                 '}';
     }
 }
