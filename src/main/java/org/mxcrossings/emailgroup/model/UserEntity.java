@@ -27,6 +27,9 @@ public class UserEntity implements Serializable {
     @NotNull
     private String password;
 
+    @NotNull
+    private String username;
+
     @Size(min = 3, max = 50)
     @NotBlank(message = "First name is required.")
     private String firstName;
@@ -45,7 +48,7 @@ public class UserEntity implements Serializable {
     public UserEntity() {
     }
 
-    public UserEntity(String email, String password, String firstName, String lastName, String phoneNumber, String birthday) {
+    public UserEntity(String email, String password, String username, String firstName, String lastName, String phoneNumber, String birthday) {
         this.email = email;
         this.password = password;
         this.firstName = firstName;
@@ -72,6 +75,14 @@ public class UserEntity implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getFirstName() {
@@ -116,6 +127,7 @@ public class UserEntity implements Serializable {
                 ", lastName='" + lastName + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
                 ", birthday='" + birthday + '\'' +
+                ", username='" + username + '\'' +
                 '}';
     }
 }

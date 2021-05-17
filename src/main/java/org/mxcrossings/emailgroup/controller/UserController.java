@@ -63,7 +63,8 @@ public class UserController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<UserEntity> deleteUser(@PathVariable("id") Long id){
+    public ResponseEntity<?> deleteUser(@PathVariable("id") Long id){
+        //the question mark is because it doesn't return anything
         userService.deleteUser(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
